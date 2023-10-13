@@ -51,15 +51,15 @@ public class Room {
         return itmList = listOfItems.get(x);
     }
 
-    // EFFECTS: lists all Items in Room and all Item attributes
+    // EFFECTS: lists all Items in Room with attribute titles
     public String getItems() {
         String items = "";
         for (int n = 0; n < getNumberOfItemsInRoom(); n++) {
             items += "Item Rank #" + n + "\n" + "Item Name:" + listOfItems.get(n).getName()
                     + "\n" + "Item Category:" + listOfItems.get(n).getCategory() + "\n" + "Item Rating:"
-                    + listOfItems.get(n).getRating() + "\n" + "Item Price:" + listOfItems.get(n).getCategory()
+                    + listOfItems.get(n).getRating() + "\n" + "Item Price:" + listOfItems.get(n).getPriceInCAD()
                     + "\n" + "Is For Sale:" + listOfItems.get(n).isForSale() + "\n" + "What It Means To Me:"
-                    + listOfItems.get(n).getDescription() + "\n" + "\n";
+                    + listOfItems.get(n).getDescription() + "\n\n";
         }
         return items;
     }

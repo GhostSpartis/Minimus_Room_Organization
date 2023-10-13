@@ -68,5 +68,4 @@ class RoomTest {
         roomTest1.addItem(item2);
         assertEquals(roomTest1.getItems(),roomTest1.getItems());
     }
-
 }
