@@ -63,4 +63,8 @@ public class Room {
         }
         return items;
     }
+
+    // Todo List: sort list based on sale status being true
+    // Todo list: sort rank so higher rating is at the top
+    // Todo list: add Total item price for items with saleStatus = True
 }

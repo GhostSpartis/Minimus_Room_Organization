@@ -12,6 +12,8 @@ public class MinimusApp {
     private Room rm;
     private Scanner input;
 
+
+    // initalizes app
     public MinimusApp() {
         runMinimus();
     }
@@ -39,6 +41,7 @@ public class MinimusApp {
         System.out.println("\nGoodbye!");
     }
 
+    // Todo list: add different sorting options as well as total price of for sale items
     // MODIFIES: this
     // EFFECTS: processes user command , borrowed from TellerApp
     //          https://github.students.cs.ubc.ca/CPSC210/TellerApp
@@ -82,29 +85,6 @@ public class MinimusApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: Helper made to create an item and place it into the room
-    public Item createItems(String name, String category, int rating, int priceInCAD,
-                            Boolean saleStatus, String description) {
-
-        item = new Item(name, category, rating, priceInCAD, saleStatus, description);
-
-        rm.addItem(item);
-
-        return item;
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Helper made to check item status in a room
-    private void checkItem(Item user) {
-
-        if (rm.hasItem(user)) {
-            System.out.println("The Item has been placed into the room!!");
-        } else {
-            System.out.println("The Item has been Removed!!");
-        }
-    }
-
-    // MODIFIES: this
     // EFFECTS: walks user through item creation process, then adds item to list via createitems()
     private void newItem() {
 
@@ -134,6 +114,7 @@ public class MinimusApp {
 
     }
 
+    // todo list; Fix Remove Item
     // MODIFIES: This
     // EFFECTS: Removes a given item
     private void removeItem() {
@@ -150,6 +131,29 @@ public class MinimusApp {
             rm.removeItem(rm.getItem(x));
         }
         System.out.println("Item Has Been Removed \n");
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Helper made to create an item and place it into the room
+    public Item createItems(String name, String category, int rating, int priceInCAD,
+                            Boolean saleStatus, String description) {
+
+        item = new Item(name, category, rating, priceInCAD, saleStatus, description);
+
+        rm.addItem(item);
+
+        return item;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Helper made to check item status in a room
+    private void checkItem(Item user) {
+
+        if (rm.hasItem(user)) {
+            System.out.println("The Item has been placed into the room!!");
+        } else {
+            System.out.println("The Item has been Removed!!");
+        }
     }
 }
 
