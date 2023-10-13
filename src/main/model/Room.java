@@ -1,14 +1,13 @@
 package model;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class Room {
 
     private final ArrayList<Item> listOfItems;
-    private Item itmList;
 
     // Creates a new ArrayList in the constructor
     public Room() {
@@ -45,6 +44,7 @@ public class Room {
 
     // EFFECTS: returns item at given point in list
     public Item getItem(int x) {
+        Item itmList;
         if (listOfItems.get(x) == null) {
             return null;
         }
