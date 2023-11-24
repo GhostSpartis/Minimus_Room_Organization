@@ -3,10 +3,15 @@ package ui;
 
 import model.Item;
 import model.Room;
+import presistence.JsonReader;
+import presistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MinimusApp {
+    private static final String JSON_STORE = "./data/room.json";
     private Item user;
     private Item item;
     private Room rm;
@@ -41,7 +46,7 @@ public class MinimusApp {
         System.out.println("\nGoodbye!");
     }
 
-    // Todo list: add different sorting options as well as total price of for sale items
+
     // MODIFIES: this
     // EFFECTS: processes user command , borrowed from TellerApp
     //          https://github.students.cs.ubc.ca/CPSC210/TellerApp
@@ -52,6 +57,16 @@ public class MinimusApp {
             viewRoom();
         } else if (command.equals("r")) {
             removeItem();
+        } else if (command.equals("g")) {
+            sortRoom();
+        } else if (command.equals("t")) {
+            totalPrice();
+        } else if (command.equals("a")) {
+            removeSold();
+        } else if (command.equals("s")) {
+            saveRoom();
+        } else if (command.equals("l")) {
+            loadRoom();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -72,9 +87,14 @@ public class MinimusApp {
     //          https://github.students.cs.ubc.ca/CPSC210/TellerApp
     private void displayMenu() {
         System.out.println("\nSelect from:");
-        System.out.println("\tn -> new item");
-        System.out.println("\tv -> view room");
-        System.out.println("\tr -> remove item");
+        System.out.println("\tn -> New Item");
+        System.out.println("\tv -> View Room");
+        System.out.println("\tg -> Sort by Rating (from Greatest to Least)");
+        System.out.println("\tt -> Total Price for On Sale Items");
+        System.out.println("\tr -> Remove Item");
+        System.out.println("\ta -> Remove All Items On Sale");
+        System.out.println("\ts -> Save Current Room");
+        System.out.println("\tl -> Load Last Room");
         System.out.println("\tq -> quit");
     }
 
@@ -114,24 +134,40 @@ public class MinimusApp {
 
     }
 
-    // todo list; Fix Remove Item
+
     // MODIFIES: This
     // EFFECTS: Removes a given item
     private void removeItem() {
-
-        String rmvitem;
-        int x;
+        String x;
 
         System.out.println("Name of the Item You Want to remove: \n");
-        rmvitem = input.next();
-        System.out.println("Rank Of the Item You Want to Remove\n");
-        x = input.nextInt();
+        x = input.next();
 
-        if (rmvitem == rm.getItem(x).getName()) {
-            rm.removeItem(rm.getItem(x));
-        }
+        rm.removeItem(bringItem(x));
+
+
         System.out.println("Item Has Been Removed \n");
     }
+
+    // MODIFIES: This
+    // EFFECTS: Sorts room from highest rating to lowest
+    private void sortRoom() {
+        rm.sortRating();
+        System.out.println("Room Has Been SORTED!!! \n");
+    }
+
+    // EFFECTS: Returns the Total Price of all items on sale
+    private void totalPrice() {
+        System.out.println("Total Price of Items: $" + rm.getTotalPrice());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Removes any items that are on sale
+    private void removeSold() {
+        rm.removeSoldItems();
+        System.out.println("All On Sale Items Have been Removed");
+    }
+
 
     // MODIFIES: this
     // EFFECTS: Helper made to create an item and place it into the room
@@ -153,6 +189,37 @@ public class MinimusApp {
             System.out.println("The Item has been placed into the room!!");
         } else {
             System.out.println("The Item has been Removed!!");
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: Helper made to convert item name to Item
+    public Item bringItem(String x) {
+        return rm.getItem(rm.findItem(x));
+    }
+
+    // EFFECTS: saves the workroom to file
+    private void saveRoom() {
+        JsonWriter jsonWriter = new JsonWriter(JSON_STORE);
+        try {
+            jsonWriter.open();
+            jsonWriter.write(rm);
+            jsonWriter.close();
+            System.out.println("Saved Room" + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads workroom from file
+    private void loadRoom() {
+        JsonReader jsonReader = new JsonReader();
+        try {
+            rm = jsonReader.readRoom(JSON_STORE);
+            System.out.println("Loaded Room" + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 }

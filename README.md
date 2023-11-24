@@ -37,6 +37,8 @@ way.
 - As a user, I want to be able to mark an item as up for sale
 - As a user, I want to be able to remove items from my room
 - As a user, I want to be able to rate an item's value from 1-10 
-- As a user, I want to be able rankings of my items in rating and CAD
-- As a user, I want to be able to see statistics of the categories of items being removed as well as which im likely to keep
-
+- As a user, I want to be able to see my items sorted based on rating
+- As a user, I want to be able to see the total for the items I put on sale
+- As a user, I want to be able to multi-remove all on sale items in my room
+- As a user, I want to be able save my current room
+- As a user, I want to be able to load my current room

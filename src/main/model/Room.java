@@ -1,11 +1,18 @@
 package model;
 
+import presistence.Writable;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
+import java.util.Collections;
 import java.util.ArrayList;
+import java.util.List;
 
 
 
-public class Room {
+
+
+public class Room implements Writable {
 
     private final ArrayList<Item> listOfItems;
 
@@ -51,6 +58,17 @@ public class Room {
         return itmList = listOfItems.get(x);
     }
 
+    // EFFECTS: Returns the given item's location in the list
+    public int findItem(String itemName) {
+        int jinx = 0;
+        for (int n = 0; n < getNumberOfItemsInRoom(); n++) {
+            if (getItem(n).getName() == itemName) {
+                return jinx = n;
+            }
+        }
+        return jinx;
+    }
+
     // EFFECTS: lists all Items in Room with attribute titles
     public String getItems() {
         String items = "";
@@ -64,7 +82,58 @@ public class Room {
         return items;
     }
 
-    // Todo List: sort list based on sale status being true
-    // Todo list: sort rank so higher rating is at the top
-    // Todo list: add Total item price for items with saleStatus = True
+   // REQUIRES: non-Empty list
+   // MODIFIES: This
+   // EFFECTS: Sorts the given list based on rating descending from 10-1
+    public void sortRating() {
+        Collections.sort(listOfItems, new ItemComparator());
+    }
+
+    // REQUIRES: non-Empty list
+    // MODIFIES: This
+    // EFFECTS: Sorts the given list based on rating descending from 10-1
+    public void sortSaleStatus() {
+        Collections.sort(listOfItems, new BooleanComparator());
+    }
+
+    // EFFECTS: returns the Total Price of all items on the list that are up for sale
+    public int getTotalPrice() {
+        int ttp = 0;
+        for (int n = 0; n < getNumberOfItemsInRoom(); n++) {
+            if (getItem(n).isForSale() == true) {
+                ttp = getItem(n).getPriceInCAD() + ttp;
+            }
+        }
+        return ttp;
+    }
+
+    // EFFECTS: this
+    // MODIFIES: removes all items on the list that are on sale
+    public void removeSoldItems() {
+        sortSaleStatus();
+        for (int n = 0; n < getNumberOfItemsInRoom(); n++)  {
+            if (getItem(n).isForSale() == true) {
+                removeItem(getItem(n));
+                removeSoldItems();
+            }
+        }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("items", itemsToJson());
+        return json;
+    }
+
+    // EFFECTS: returns Items in a Room as a JSON array
+    private JSONArray itemsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Item i : listOfItems) {
+            jsonArray.put(i.toJson());
+        }
+
+        return jsonArray;
+    }
 }

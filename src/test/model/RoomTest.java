@@ -3,6 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Collections;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -68,4 +71,60 @@ class RoomTest {
         roomTest1.addItem(item2);
         assertEquals(roomTest1.getItems(),roomTest1.getItems());
     }
+
+    @Test
+    public void testFindItem() {
+
+        roomTest1.addItem(item);
+        roomTest1.addItem(item2);
+        assertEquals(1 ,roomTest1.findItem(item2.getName()));
+    }
+
+    @Test
+    public void testSortRank() {
+
+        roomTest1.addItem(item);
+        roomTest1.addItem(item);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item);
+        roomTest1.sortRating();
+        assertEquals(10, roomTest1.getItem(0).getRating());
+    }
+
+    @Test
+    public void testTotalPrice() {
+
+        roomTest1.addItem(item);
+        roomTest1.addItem(item);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item);
+        roomTest1.sortRating();
+        assertEquals(3600, roomTest1.getTotalPrice());
+    }
+
+    @Test
+    public void testSortSaleStatus() {
+
+        roomTest1.addItem(item);
+        roomTest1.addItem(item);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item);
+        roomTest1.sortSaleStatus();
+        assertEquals(item, roomTest1.getItem(0));
+    }
+
+    @Test
+    public void testRemoveSaleItems() {
+
+        roomTest1.addItem(item);
+        roomTest1.addItem(item);
+        roomTest1.addItem(item);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item2);
+        roomTest1.addItem(item);
+        roomTest1.removeSoldItems();
+        assertEquals(0, roomTest1.getTotalPrice());
+    }
+
 }

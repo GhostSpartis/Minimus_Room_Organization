@@ -1,0 +1,8 @@
+{"items": [{
+  "price": 1,
+  "name": "TestItem",
+  "rating": 1,
+  "on sale": true,
+  "description": "d",
+  "category": "d"
+}]}

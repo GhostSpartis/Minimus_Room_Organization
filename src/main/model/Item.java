@@ -1,7 +1,10 @@
 package model;
 
+import org.json.JSONObject;
+import presistence.Writable;
+
  // Represents an Item with its name, category, value (1-10), priceInCAD (in dollars), for sale or not and description
-public class Item {
+public class Item implements Writable {
     private String name;         // name of the item
     private String category;     // category to help sort item
     private int rating;           // value range from 1-10 from user
@@ -52,5 +55,16 @@ public class Item {
         return description;
     }
 
-    
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("category", category);
+        json.put("rating", rating);
+        json.put("price", priceInCAD);
+        json.put("on sale", saleStatus);
+        json.put("description", description);
+        return json;
+    }
+
 }
