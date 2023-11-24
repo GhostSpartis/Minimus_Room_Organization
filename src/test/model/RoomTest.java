@@ -53,6 +53,12 @@ class RoomTest {
     }
 
     @Test
+    public void testRemoveNonExistentItemFromRoom() {
+        roomTest1.addItem(item);
+        assertTrue(roomTest1.removeItem(item2));
+    }
+
+    @Test
     public void testItemLocator() {
 
         roomTest1.addItem(item2);
@@ -62,6 +68,11 @@ class RoomTest {
         roomTest1.addItem(item2);
         assertEquals(item, roomTest1.getItem(2));
 
+    }
+
+    @Test
+    public void testNullRoomItemLocator() {
+        assertNull(roomTest1.getItem(0));
     }
 
     @Test
@@ -78,6 +89,13 @@ class RoomTest {
         roomTest1.addItem(item);
         roomTest1.addItem(item2);
         assertEquals(1 ,roomTest1.findItem(item2.getName()));
+    }
+
+    @Test
+    public void testCantFindItem() {
+
+        roomTest1.addItem(item);
+        assertEquals(-1 ,roomTest1.findItem(item2.getName()));
     }
 
     @Test

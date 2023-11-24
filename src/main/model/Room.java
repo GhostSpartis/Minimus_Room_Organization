@@ -52,13 +52,13 @@ public class Room implements Writable {
     // EFFECTS: returns item at given point in list
     public Item getItem(int x) {
         Item itmList;
-        if (listOfItems.get(x) == null) {
+        if (listOfItems.isEmpty()) {
             return null;
         }
         return itmList = listOfItems.get(x);
     }
 
-    // EFFECTS: Returns the given item's location in the list
+    // EFFECTS: Returns the given item's location in the list, if not in list returns -1
     public int findItem(String itemName) {
         int jinx = 0;
         for (int n = 0; n < getNumberOfItemsInRoom(); n++) {
@@ -66,7 +66,7 @@ public class Room implements Writable {
                 return jinx = n;
             }
         }
-        return jinx;
+        return jinx = -1;
     }
 
     // EFFECTS: lists all Items in Room with attribute titles
