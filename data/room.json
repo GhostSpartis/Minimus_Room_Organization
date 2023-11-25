@@ -1,18 +1,18 @@
 {"items": [
     {
         "price": 1,
-        "name": "amogus",
+        "name": "1",
         "rating": 1,
         "on sale": true,
-        "description": "d",
-        "category": "sus"
+        "description": "1",
+        "category": "1"
     },
     {
-        "price": 10,
-        "name": "amogus",
-        "rating": 5,
+        "price": 1,
+        "name": "1",
+        "rating": 1,
         "on sale": true,
-        "description": "d",
-        "category": "sus"
+        "description": "1",
+        "category": "1"
     }
 ]}
