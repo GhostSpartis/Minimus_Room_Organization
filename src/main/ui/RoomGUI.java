@@ -15,7 +15,6 @@ import java.util.InputMismatchException;
 
 public class RoomGUI extends JFrame implements ActionListener {
 
-    private static final String Json_Data = "./data/Room.json";
     private Room room;
     private Item item;
     private static final String JSON_STORE = "./data/room.json";
@@ -23,12 +22,9 @@ public class RoomGUI extends JFrame implements ActionListener {
     private JPanel home;
     private JPanel roomPanel;
     private JPanel itemsPage;
-    private JPanel totalPrice;
     private JButton addButton;
-    private JButton makeButton;
     private JButton viewButton;
     private JButton sortButton;
-    private JButton totalButton;
     private JButton removeButton;
     private JButton removeSoldButton;
     private JButton saveButton;
@@ -37,7 +33,9 @@ public class RoomGUI extends JFrame implements ActionListener {
     private JButton addItem;
     private JLabel items;
     private JLabel allprice;
+    private JLabel remove;
     private boolean inRoom;
+    private JTextField rmv;
     private JTextField nme;
     private JTextField cat;
     private JTextField rat;
@@ -51,56 +49,76 @@ public class RoomGUI extends JFrame implements ActionListener {
     private JLabel forsale;
     private JLabel description;
     private JLabel itemAdded;
-    private Font ttlfnt = new Font("Audrey", Font.BOLD, 20);
-    private Font fnt = new Font("Audrey", Font.BOLD, 12);
-    private Dimension box = new Dimension(1200, 200);
+    private JLabel img1;
+    private Font ttlfnt = new Font("Audrey", Font.BOLD, 30);
+    private Font fnt = new Font("Audrey", Font.BOLD, 20);
+    private Dimension box = new Dimension(500, 100);
 
     // Makes a new JFrame with Room and Item attributes
     public RoomGUI() {
         super("Minimus App");
+        room = new Room();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(500,500));
+        setPreferredSize(new Dimension(1000,500));
         buildHome();
         buildRoomPanel();
         buildItemCreationPanel();
+        JLabel title = new JLabel("MINIMUS");
+        title.setFont(new Font("Audrey", Font.BOLD, 200));
+        home.add(title);
         buildMenuButtons();
         JButton homeButton = new JButton("Return Home");
         homeButton.setActionCommand("Return Home");
         homeButton.addActionListener(this);
-        placeButtons(addButton,viewButton,sortButton,totalButton,removeButton,removeSoldButton,saveButton,
-                loadButton,exitButton, homeButton);
+        placeButtons(addButton,viewButton,sortButton,removeSoldButton,saveButton,
+                loadButton,exitButton);
         createButtonActions();
         home.setVisible(true);
-        room = new Room();
     }
 
     // EFFECTS: Builds the home panel
     public void buildHome() {
         home = new JPanel();
-        home.setBackground(Color.white);
         add(home);
         items = new JLabel();
-        items.setText("What Is In Your Room?");
     }
 
     // MODIFIES: this
     // EFFECTS: Builds panel that displays all Items in a room
     public void buildRoomPanel() {
-        roomPanel = new JPanel(new GridLayout(2,1));
+        roomPanel = new JPanel(new GridLayout(4,3));
         JScrollPane scroll = new JScrollPane(items, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
+
+        removeButton = new JButton("Remove an Item");
+        removeButton.setActionCommand("Remove an Item");
+        removeButton.addActionListener(this);
+
+        remove = new JLabel("Remove an Item");
+        rmv = new JTextField(10);
+
+        allprice = new JLabel();
+        allprice.setText("Your Total Is: $" + room.getTotalPrice());
+        allprice.setFont(fnt);
+
 
         JButton homeButton = new JButton("Return Home");
         homeButton.setActionCommand("Return Home");
         homeButton.addActionListener(this);
         addHomeButton(homeButton, roomPanel);
         items.setFont(fnt);
+        removeButton.setFont(fnt);
+        rmv.setMaximumSize(box);
+        roomPanel.add(removeButton);
         roomPanel.add(scroll);
+        roomPanel.add(rmv);
+        roomPanel.add(allprice);
     }
 
     // EFFECTS: Creates Home button Attributes
     public void addHomeButton(JButton button1, JPanel panel) {
-        button1.setFont(ttlfnt);
+        button1.setFont(fnt);
         button1.setBackground(Color.WHITE);
         button1.setForeground(Color.BLACK);
         panel.add(button1);
@@ -194,22 +212,17 @@ public class RoomGUI extends JFrame implements ActionListener {
         addButton = new JButton("Add New Item");
         viewButton = new JButton("View Your Room");
         sortButton = new JButton("Sort Room from Highest Rated Items to Lowest");
-        totalButton = new JButton("Calculate Total Price For Items On Sale");
-        removeButton = new JButton("Remove an Item");
         removeSoldButton = new JButton("Remove all Items On Sale");
         saveButton = new JButton("Save Your Current Room");
         loadButton = new JButton("Load your Previously Saved Room");
         exitButton = new JButton("Close Your Room");
-        JButton homeButton = new JButton("Return Home");
-        homeButton.setActionCommand("Return Home");
-        homeButton.addActionListener(this);
 
     }
 
     // EFFECTS: Calls the addButton method for each argument
 
     public void placeButtons(JButton btn1, JButton btn2, JButton btn3, JButton btn4, JButton btn5,
-                             JButton btn6, JButton btn7, JButton btn8, JButton btn9, JButton btn10) {
+                             JButton btn6, JButton btn7) {
 
         placeButton(btn1, home);
         placeButton(btn2, home);
@@ -218,9 +231,7 @@ public class RoomGUI extends JFrame implements ActionListener {
         placeButton(btn5, home);
         placeButton(btn6, home);
         placeButton(btn7, home);
-        placeButton(btn8, home);
-        placeButton(btn9, home);
-        placeButton(btn10, home);
+
 
     }
 
@@ -246,10 +257,6 @@ public class RoomGUI extends JFrame implements ActionListener {
         viewButton.setActionCommand("View Room");
         sortButton.addActionListener(this);
         sortButton.setActionCommand("Sort by Rating (from Greatest to Least)");
-        totalButton.addActionListener(this);
-        totalButton.setActionCommand("Total Price for On Sale Items");
-        removeButton.addActionListener(this);
-        removeButton.setActionCommand("Remove Item");
         removeSoldButton.addActionListener(this);
         removeSoldButton.setActionCommand("Remove All Items On Sale");
         saveButton.addActionListener(this);
@@ -270,10 +277,8 @@ public class RoomGUI extends JFrame implements ActionListener {
             viewItemsinRoom();
         } else if (e.getActionCommand().equals("Sort by Rating (from Greatest to Least)")) {
             sortItems();
-        } else if (e.getActionCommand().equals("Total Price for On Sale Items")) {
-            totalPrice();
-        } else if (e.getActionCommand().equals("Remove Item")) {
-            removeItem(item);
+        } else if (e.getActionCommand().equals("Remove an Item")) {
+            removeItem();
         } else if (e.getActionCommand().equals("Remove All Items On Sale")) {
             room.removeSoldItems();
         } else if (e.getActionCommand().equals("Save Current Room")) {
@@ -283,17 +288,20 @@ public class RoomGUI extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("quit")) {
             System.exit(0);
         } else if (e.getActionCommand().equals("Return Home")) {
-            returnhome();
+            returnHome();
         } else if (e.getActionCommand().equals("Create Item")) {
             addItemtoRoom();
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Sorts the room user is currently in
     public void sortItems() {
         room.sortRating();
         viewItemsinRoom();
     }
 
+    // EFFECTS: Builds Item Creation page for adding items
     public void buildItemPanel() {
         add(itemsPage);
         itemsPage.setVisible(true);
@@ -322,36 +330,27 @@ public class RoomGUI extends JFrame implements ActionListener {
 
     // EFFECTS: Makes it so that the Items in Room are the only thing visible
     public void viewItemsinRoom() {
-        add(itemsPage);
+        add(roomPanel);
         itemsPage.setVisible(false);
         home.setVisible(false);
         roomPanel.setVisible(true);
-        itemAdded.setText("Has The Item Been Added?" + inRoom);
+        items.setText("<html><pre>Items in Room: \n" + room.getItems() + "\n</pre></html>");
+        allprice.setText("Your Total Is: $" + room.getTotalPrice());
     }
 
     // MODIFIES: this
     // EFFECTS: Remove a given item from a room
-    public void removeItem(Item itm) {
-
+    public void removeItem() {
         try {
-            room.removeItem(itm);
-            items.setText("<html>Items in Room: \n" + room.getItems() + "</html>");
-            System.out.println("Item Has Been Removed \n");
-            inRoom = false;
+            int n = Integer.parseInt(rmv.getText());
+            room.removeItem(room.getItem(n));
+            items.setText("<html><pre>Items in Room: \n" + room.getItems() + "\n</pre></html>");
+            allprice.setText("Your Total Is: $" + room.getTotalPrice());
         } catch (NullPointerException e) {
             System.out.println("Add an Item before trying to remove it");
         } catch (IndexOutOfBoundsException e) {
             items.setText("Room hasn't been built yet, please build room");
         }
-    }
-
-    // EFFECTS: Returns the total price of all Items on sale
-    public void totalPrice() {
-        totalPrice = new JPanel();
-        totalPrice.setBackground(Color.white);
-        add(totalPrice);
-        allprice = new JLabel();
-        allprice.setText("Your Total Is:" + room.getTotalPrice());
     }
 
     //EFFECTS: Saves the Current State of the Room
@@ -380,7 +379,7 @@ public class RoomGUI extends JFrame implements ActionListener {
     }
 
     //EFFECTS: this is the return home function
-    public void returnhome() {
+    public void returnHome() {
         home.setVisible(true);
         roomPanel.setVisible(false);
         itemsPage.setVisible(false);

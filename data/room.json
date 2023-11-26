@@ -1,18 +1,26 @@
 {"items": [
     {
-        "price": 1,
-        "name": "1",
+        "price": 10000,
+        "name": "a",
         "rating": 1,
         "on sale": true,
-        "description": "1",
-        "category": "1"
+        "description": "d",
+        "category": "a"
     },
     {
-        "price": 1,
-        "name": "1",
+        "price": 10000,
+        "name": "a",
         "rating": 1,
         "on sale": true,
-        "description": "1",
-        "category": "1"
+        "description": "d",
+        "category": "a"
+    },
+    {
+        "price": 10000,
+        "name": "a",
+        "rating": 1,
+        "on sale": true,
+        "description": "d",
+        "category": "a"
     }
 ]}
