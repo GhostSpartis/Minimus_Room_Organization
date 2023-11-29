@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.InputMismatchException;
 
+
 public class RoomGUI extends JFrame implements ActionListener {
 
     private Room room;
@@ -101,7 +102,6 @@ public class RoomGUI extends JFrame implements ActionListener {
         allprice = new JLabel();
         allprice.setText("Your Total Is: $" + room.getTotalPrice());
         allprice.setFont(fnt);
-
 
         JButton homeButton = new JButton("Return Home");
         homeButton.setActionCommand("Return Home");
@@ -220,7 +220,6 @@ public class RoomGUI extends JFrame implements ActionListener {
     }
 
     // EFFECTS: Calls the addButton method for each argument
-
     public void placeButtons(JButton btn1, JButton btn2, JButton btn3, JButton btn4, JButton btn5,
                              JButton btn6, JButton btn7) {
 
@@ -269,7 +268,7 @@ public class RoomGUI extends JFrame implements ActionListener {
     }
 
 
-    //This is the method that is called when the the JButton btn is clicked
+    //This is the method that is called when the JButton btn is clicked
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("New Item")) {
             buildItemPanel();
@@ -384,4 +383,5 @@ public class RoomGUI extends JFrame implements ActionListener {
         roomPanel.setVisible(false);
         itemsPage.setVisible(false);
     }
+
 }

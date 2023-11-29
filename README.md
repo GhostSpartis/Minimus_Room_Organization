@@ -42,17 +42,22 @@ way.
 - As a user, I want to be able to multi-remove all on sale items in my room
 - As a user, I want to be able save my current room
 - As a user, I want to be able to load my current room
+- As a user, I want to be able to add multiple Items to a Room
+- As a user, I want to be able to load and save the state of the application
 
 # Instructions for Grader
-- You can generate the first required action related to the user story "adding multiple Xs to a Y" by
+- You can generate the first required action related to the user story "adding multiple Items to a Room" by
    Clicking on add Item, fill in the values as specified,
    once completed, click **create item** to create an item inside the room
-   To Remove an Item go to **View Items** type in the textfield at the bottom
+- To View created Items, click **Return Home** then click View Items, this shows an updating number on the price of
+  items on sale as well as a remove item functionality
+- To Remove an Item go to **View Items** type in the textfield at the bottom
    the rank of the item, click on remove Item
 - You can generate the second required action related to the user story "adding multiple Xs to a Y" by
   changing the variables in the add item panel then clicking *create Item* as many times as you please
-  to view your items, click return home then view items  
-- You can locate my visual component by
+  to view your items, click return home then view items
+- To Sort Items, click on **Sort Items From Highest to lowest**
+- To Remove all items on sale, click on **remove sold items**
 - You can save the state of my application by clicking save at the home screen
 - You can reload the state of my application by clicking load at the home screen
     
