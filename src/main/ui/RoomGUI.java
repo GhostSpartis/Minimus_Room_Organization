@@ -137,7 +137,7 @@ public class RoomGUI extends JFrame implements ActionListener {
         homeButton.addActionListener(this);
         addHomeButton(homeButton, itemsPage);
 
-        roomPage();
+        initializeItemAttributes();
 
         itemCreationDisplaySettings();
 
@@ -146,7 +146,9 @@ public class RoomGUI extends JFrame implements ActionListener {
 
     }
 
-    public void roomPage() {
+    // MODIFIES: this
+    // EFFECTS: Initializes all labels, textfields and creat button
+    public void initializeItemAttributes() {
         addItem = new JButton("Create Item");
         addItem.setActionCommand("Create Item");
         addItem.addActionListener(this);
@@ -187,7 +189,7 @@ public class RoomGUI extends JFrame implements ActionListener {
         dsc.setMaximumSize(box);
     }
 
-    //EFFECTS: Adds Items created to the panel
+    //EFFECTS: Adds created Item Fields to the panel
     public void itemPanelPlacement() {
         itemsPage.add(addItem);
 
@@ -207,7 +209,7 @@ public class RoomGUI extends JFrame implements ActionListener {
         itemsPage.add(itemAdded);
     }
 
-    // EFFECTS: Builds menu buttons and titles
+    // EFFECTS: Initializes menu buttons and titles
     public void buildMenuButtons() {
         addButton = new JButton("Add New Item");
         viewButton = new JButton("View Your Room");
