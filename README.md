@@ -60,4 +60,30 @@ way.
 - To Remove all items on sale, click on **remove sold items**
 - You can save the state of my application by clicking save at the home screen
 - You can reload the state of my application by clicking load at the home screen
-    
+
+# Phase 4: Task 2
+---
+```
+Thu Nov 30 22:24:05 PST 2023
+Room Has Been Opened
+Thu Nov 30 22:24:37 PST 2023
+Laptop Has Been added to Room
+Thu Nov 30 22:25:03 PST 2023
+Hunting Horn Has Been added to Room
+Thu Nov 30 22:25:13 PST 2023
+Laptop Has Been Removed from Room
+Thu Nov 30 22:25:19 PST 2023
+Room Has Been Saved
+Thu Nov 30 22:25:21 PST 2023
+Room Has Been Loaded
+Thu Nov 30 22:25:21 PST 2023
+Room Has Been Opened
+Thu Nov 30 22:25:21 PST 2023
+Hunting Horn Has Been added to Room
+Thu Nov 30 22:25:23 PST 2023
+Items In Room Have Been Sorted
+Thu Nov 30 22:25:28 PST 2023
+Hunting Horn Has Been Removed from Room
+Thu Nov 30 22:25:28 PST 2023
+Items On Sale Have Been Removed
+```

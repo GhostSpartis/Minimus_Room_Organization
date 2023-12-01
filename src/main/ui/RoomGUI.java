@@ -2,6 +2,8 @@ package ui;
 
 import model.Item;
 import model.Room;
+import model.Event;
+import model.EventLog;
 import presistence.JsonReader;
 import presistence.JsonWriter;
 
@@ -287,12 +289,20 @@ public class RoomGUI extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals("Load Last Room")) {
             loadRoom();
         } else if (e.getActionCommand().equals("quit")) {
-            System.exit(0);
+            eventlogger();
         } else if (e.getActionCommand().equals("Return Home")) {
             returnHome();
         } else if (e.getActionCommand().equals("Create Item")) {
             addItemtoRoom();
         }
+    }
+
+    // EFFECTS: Logs Events executed
+    public void eventlogger() {
+        for (Event e : EventLog.getInstance()) {
+            System.out.println(e);
+        }
+        System.exit(0);
     }
 
     // MODIFIES: this
@@ -368,7 +378,7 @@ public class RoomGUI extends JFrame implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads workroom from file
+    // EFFECTS: loads room from file
     private void loadRoom() {
         JsonReader jsonReader = new JsonReader();
         try {

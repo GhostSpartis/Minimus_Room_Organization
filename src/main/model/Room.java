@@ -19,12 +19,14 @@ public class Room implements Writable {
     // Creates a new ArrayList in the constructor
     public Room() {
         listOfItems = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("Room Has Been Opened"));
     }
 
     // MODIFIES: this
     // EFFECTS: add an Item to the list(Room)
     public void addItem(Item item) {
         listOfItems.add(item);
+        EventLog.getInstance().logEvent(new Event(item.getName() + " Has Been added to Room"));
     }
 
     // EFFECTS: returns the size of list
@@ -43,6 +45,7 @@ public class Room implements Writable {
     public boolean removeItem(Item item) {
         if (hasItem(item)) {
             listOfItems.remove(item);
+            EventLog.getInstance().logEvent(new Event(item.getName() + " Has Been Removed from Room"));
             return false;
         } else {
             return true;
@@ -88,6 +91,7 @@ public class Room implements Writable {
    // EFFECTS: Sorts the given list based on rating descending from 10-1
     public void sortRating() {
         Collections.sort(listOfItems, new ItemComparator());
+        EventLog.getInstance().logEvent(new Event("Items In Room Have Been Sorted"));
     }
 
     // REQUIRES: non-Empty list
@@ -116,6 +120,7 @@ public class Room implements Writable {
             if (getItem(n).isForSale() == true) {
                 removeItem(getItem(n));
                 removeSoldItems();
+                EventLog.getInstance().logEvent(new Event("Items On Sale Have Been Removed"));
             }
         }
     }

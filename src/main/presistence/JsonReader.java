@@ -1,5 +1,7 @@
 package presistence;
 
+import model.Event;
+import model.EventLog;
 import model.Item;
 import model.Room;
 
@@ -15,11 +17,12 @@ import org.json.*;
 public class JsonReader {
 
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads room from file and returns it;
     // throws IOException if an error occurs reading data from file
     public Room readRoom(String source) throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Room Has Been Loaded"));
         return parseRoom(jsonObject);
     }
 
@@ -34,7 +37,7 @@ public class JsonReader {
         return contentBuilder.toString();
     }
 
-    // EFFECTS: parses workroom from JSON object and returns it
+    // EFFECTS: parses room from JSON object and returns it
     private Room parseRoom(JSONObject jsonObject) {
         Room room = new Room();
         addItems(room, jsonObject);

@@ -1,26 +1,8 @@
-{"items": [
-    {
-        "price": 10000,
-        "name": "a",
-        "rating": 1,
-        "on sale": true,
-        "description": "d",
-        "category": "a"
-    },
-    {
-        "price": 10000,
-        "name": "a",
-        "rating": 1,
-        "on sale": true,
-        "description": "d",
-        "category": "a"
-    },
-    {
-        "price": 10000,
-        "name": "a",
-        "rating": 1,
-        "on sale": true,
-        "description": "d",
-        "category": "a"
-    }
-]}
+{"items": [{
+    "price": 1,
+    "name": "Hunting Horn",
+    "rating": 1,
+    "on sale": true,
+    "description": "amogus",
+    "category": "Electronics"
+}]}
