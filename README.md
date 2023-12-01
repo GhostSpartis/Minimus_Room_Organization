@@ -61,7 +61,7 @@ way.
 - You can save the state of my application by clicking save at the home screen
 - You can reload the state of my application by clicking load at the home screen
 
-# Phase 4: Task 2
+Phase 4: Task 2
 ---
 ```
 Thu Nov 30 22:24:05 PST 2023
@@ -87,3 +87,20 @@ Hunting Horn Has Been Removed from Room
 Thu Nov 30 22:25:28 PST 2023
 Items On Sale Have Been Removed
 ```
+
+# Phase 4: Task 3
+- While Designing my GUI Panel I noticed that alot of the same labels and button creation was repeated over and over for
+  each panel, each with different functions. I could refactor the code of button creation to a new class via a 
+  composite pattern, so that the body of the JPanels are alot more cohesive and readable while reducing duplication in 
+  the GUI Class
+
+- Another Thing I can fix with my code is the amount of responsibility each function has in RoomGUI button behaviours,
+  right now each behaviour plays a couple different functions and object initializations which can be made more readable 
+  if I were to refactor each step of the behaviour into its own class allowing me to not only cut down on the 
+  duplicaiton of code but also makes each behaviour more human readable and can easily be explained by looking through
+  the behaviour
+
+- A third thing that can be worked on is applying composite design to the room's finditems and gettotalPrice and 
+  removsolditems functions as they all use the same template of running through a list with an accumulator with 
+  different inner bodies, that way I can make the code more readable and reduces duplication
+    
